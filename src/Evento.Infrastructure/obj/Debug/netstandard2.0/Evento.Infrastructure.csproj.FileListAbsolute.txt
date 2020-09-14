@@ -1,0 +1,12 @@
+C:\KURSY\.NetDev\5\app\src\Evento.Infrastructure\bin\Debug\netstandard2.0\Evento.Infrastructure.deps.json
+C:\KURSY\.NetDev\5\app\src\Evento.Infrastructure\bin\Debug\netstandard2.0\Evento.Infrastructure.dll
+C:\KURSY\.NetDev\5\app\src\Evento.Infrastructure\bin\Debug\netstandard2.0\Evento.Infrastructure.pdb
+C:\KURSY\.NetDev\5\app\src\Evento.Infrastructure\bin\Debug\netstandard2.0\Evento.Core.dll
+C:\KURSY\.NetDev\5\app\src\Evento.Infrastructure\bin\Debug\netstandard2.0\Evento.Core.pdb
+C:\KURSY\.NetDev\5\app\src\Evento.Infrastructure\obj\Debug\netstandard2.0\Evento.Infrastructure.csprojAssemblyReference.cache
+C:\KURSY\.NetDev\5\app\src\Evento.Infrastructure\obj\Debug\netstandard2.0\Evento.Infrastructure.AssemblyInfoInputs.cache
+C:\KURSY\.NetDev\5\app\src\Evento.Infrastructure\obj\Debug\netstandard2.0\Evento.Infrastructure.AssemblyInfo.cs
+C:\KURSY\.NetDev\5\app\src\Evento.Infrastructure\obj\Debug\netstandard2.0\Evento.Infrastructure.csproj.CoreCompileInputs.cache
+C:\KURSY\.NetDev\5\app\src\Evento.Infrastructure\obj\Debug\netstandard2.0\Evento.Infrastructure.csproj.CopyComplete
+C:\KURSY\.NetDev\5\app\src\Evento.Infrastructure\obj\Debug\netstandard2.0\Evento.Infrastructure.dll
+C:\KURSY\.NetDev\5\app\src\Evento.Infrastructure\obj\Debug\netstandard2.0\Evento.Infrastructure.pdb
