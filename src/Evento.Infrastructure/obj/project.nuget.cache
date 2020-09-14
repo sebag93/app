@@ -1,11 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "e/T3NpqfV4V9cFGQEehiCxNxYjofxTK1yRZ7RbDwmPPRDtqoODbAD7Yw2tRYM9TdDdcz9/4OGi9/miGklPAb1A==",
+  "dgSpecHash": "ysqulzP/hvMt217ZBh/A0vv1e/DruAaOHQxvwRXbvIOyYFsnYRMelgDyFJeh8BsRgCQhBBlXlI3Tab9DfCmvDQ==",
   "success": true,
   "projectFilePath": "C:\\KURSY\\.NetDev\\5\\app\\src\\Evento.Infrastructure\\Evento.Infrastructure.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\sebag\\.nuget\\packages\\automapper\\10.0.0\\automapper.10.0.0.nupkg.sha512",
+    "C:\\Users\\sebag\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\sebag\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
-    "C:\\Users\\sebag\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+    "C:\\Users\\sebag\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
+    "C:\\Users\\sebag\\.nuget\\packages\\system.reflection.emit\\4.7.0\\system.reflection.emit.4.7.0.nupkg.sha512",
+    "C:\\Users\\sebag\\.nuget\\packages\\system.reflection.emit.ilgeneration\\4.7.0\\system.reflection.emit.ilgeneration.4.7.0.nupkg.sha512"
   ],
   "logs": []
 }
