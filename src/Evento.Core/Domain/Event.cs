@@ -31,11 +31,13 @@ namespace Evento.Core.Domain
             UpdatedAt = DateTime.UtcNow;
         }
 
-        public void AddTickets (int amount, decimal price)
+        public void AddTickets(int amount, decimal price)
         {
+            var seating = _ticket.Count + 1;
             for (var i = 0; i < amount; i++)
             {
-                _ticket.Add(new Ticket());
+                _ticket.Add(new Ticket(this, seating, price));
+                seating++;
             }
         }
     }
