@@ -5,7 +5,7 @@ namespace Evento.Core.Domain
 {
     public  class Event : Entity
     {
-        private ISet<Ticket> _ticket = new HashSet<Ticket>();
+        private ISet<Ticket> _tickets = new HashSet<Ticket>();
 
         public string Name { get; protected set; }
         public string Description { get; protected set; }
@@ -13,7 +13,7 @@ namespace Evento.Core.Domain
         public DateTime StartDate { get; protected set; }
         public DateTime EndDate { get; protected set; }
         public DateTime UpdatedAt { get; protected set; }
-        public IEnumerable<Ticket> Tickets { get; protected set; }
+        public IEnumerable<Ticket> Tickets => _tickets;
 
         protected Event()
         {
@@ -33,10 +33,10 @@ namespace Evento.Core.Domain
 
         public void AddTickets(int amount, decimal price)
         {
-            var seating = _ticket.Count + 1;
+            var seating = _tickets.Count + 1;
             for (var i = 0; i < amount; i++)
             {
-                _ticket.Add(new Ticket(this, seating, price));
+                _tickets.Add(new Ticket(this, seating, price));
                 seating++;
             }
         }
