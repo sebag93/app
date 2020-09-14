@@ -1,17 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Xml;
 using Evento.Core.Repositories;
 using Evento.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using src.Evento.Infrastructure.Mappers;
 using src.Evento.Infrastructure.Repositories;
 using src.Evento.Infrastructure.Services;
@@ -30,6 +24,7 @@ namespace Evento.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //services.AddControllers().AddJsonOptions(x => x.SerializerSettings.Formatting = Formatting.Indented);
             services.AddControllers();
             services.AddScoped<IEventRepository,EventRepository>();
             services.AddScoped<IUserRepository,UserRepository>();

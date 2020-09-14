@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "xPs5V1jV+3Ch2dxwFA4ZEKymTIQ0iQGdgsiWB3oOMy9VHFrQWWI9YqGUJ+qTVYlKcMqwjiZj7i3NszAB6VdmGA==",
+  "dgSpecHash": "U0KMinr8CLGzbIgXUTqY/wJXwB+7XZEvzJLG80BrXrrcPudRveVznymNzW2eqY2JVIEl4VOD6L1+d4jJvZ+Ltw==",
   "success": true,
   "projectFilePath": "C:\\KURSY\\.NetDev\\5\\app\\src\\Evento.Api\\Evento.Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\sebag\\.nuget\\packages\\automapper\\10.0.0\\automapper.10.0.0.nupkg.sha512",
     "C:\\Users\\sebag\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
+    "C:\\Users\\sebag\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
     "C:\\Users\\sebag\\.nuget\\packages\\system.reflection.emit\\4.7.0\\system.reflection.emit.4.7.0.nupkg.sha512"
   ],
   "logs": []

@@ -1,9 +1,11 @@
 {
   "ExpandedNodes": [
     "",
+    "\\Evento.Api",
     "\\Evento.Core",
     "\\Evento.Core\\Domain",
     "\\Evento.Core\\Repositories"
   ],
+  "SelectedNode": "\\Evento.Api\\Startup.cs",
   "PreviewInSolutionExplorer": false
 }

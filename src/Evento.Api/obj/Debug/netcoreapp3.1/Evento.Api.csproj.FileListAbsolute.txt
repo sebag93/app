@@ -23,3 +23,5 @@ C:\KURSY\.NetDev\5\app\src\Evento.Api\bin\Debug\netcoreapp3.1\Evento.Infrastruct
 C:\KURSY\.NetDev\5\app\src\Evento.Api\bin\Debug\netcoreapp3.1\Evento.Infrastructure.pdb
 C:\KURSY\.NetDev\5\app\src\Evento.Api\bin\Debug\netcoreapp3.1\Evento.Core.pdb
 C:\KURSY\.NetDev\5\app\src\Evento.Api\obj\Debug\netcoreapp3.1\Evento.Api.csproj.CopyComplete
+C:\KURSY\.NetDev\5\app\src\Evento.Api\bin\Debug\netcoreapp3.1\AutoMapper.dll
+C:\KURSY\.NetDev\5\app\src\Evento.Api\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
