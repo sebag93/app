@@ -3,6 +3,7 @@ using Evento.Core.Repositories;
 using Evento.Infrastructure.Mappers;
 using Evento.Infrastructure.Repositories;
 using Evento.Infrastructure.Services;
+using Evento.Infrastructure.Settings;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -32,6 +33,7 @@ namespace Evento.Api
             services.AddScoped<IEventService,EventService>();
             services.AddSingleton(AutoMapperConfig.Initialize());
             services.AddScoped<IUserService,UserService>();
+            services.Configure<JwtSettings>(Configuration.GetSection("jwt)"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,14 +45,16 @@ namespace Evento.Api
                 app.UseDeveloperExceptionPage();
             }
 
+            var jwtSettings = app.ApplicationServices.GetService<JwtSettings>();
+
             app.UseJwtBearerAuthentication(new JwtBearerOptions
             {
                 AutomaticAuthenticate = true;
                 TokenValidationParameters = new TokenValidationParameters
                 {
-                    ValidIssuer = "http://localhost:5001",
+                    ValidIssuer = jwtSettings.Issuer,
                     ValidateAudience = false,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("secret"))
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Key))
 
                 }
             });
