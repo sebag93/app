@@ -1,12 +1,15 @@
+using System.Text;
 using Evento.Core.Repositories;
 using Evento.Infrastructure.Mappers;
 using Evento.Infrastructure.Repositories;
 using Evento.Infrastructure.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Evento.Api
 {
@@ -34,10 +37,23 @@ namespace Evento.Api
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseJwtBearerAuthentication(new JwtBearerOptions
+            {
+                AutomaticAuthenticate = true;
+                TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidIssuer = "http://localhost:5001",
+                    ValidateAudience = false,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("secret"))
+
+                }
+            });
 
             app.UseHttpsRedirection();
 
