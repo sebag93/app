@@ -29,7 +29,7 @@ namespace Evento.Api
         {
             //services.AddControllers().AddJsonOptions(x => x.SerializerSettings.Formatting = Formatting.Indented);
             services.AddControllers();
-            services.AddAuthorization();
+            services.AddAuthorization(x => x.AddPolicy("HasAdminRole", p => p.RequireRole("admin")));
             services.AddScoped<IEventRepository,EventRepository>();
             services.AddScoped<IUserRepository,UserRepository>();
             services.AddScoped<IEventService,EventService>();

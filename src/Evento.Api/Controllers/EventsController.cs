@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Evento.Infrastructure.Commands.Events;
 using Evento.Infrastructure.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Evento.Api.Controllers
 {
@@ -36,6 +37,7 @@ namespace Evento.Api.Controllers
         }
 
         [HttpPost]
+        [Authorize(Policy = "HasAdminRole")]
         public async Task<IActionResult> Post([FromBody]CreateEvent command)
         {
             command.EventId = Guid.NewGuid();
@@ -49,6 +51,7 @@ namespace Evento.Api.Controllers
 
         // /events/{id} -> HTTP PUT
         [HttpPut("{eventId}")]
+        [Authorize(Policy = "HasAdminRole")]
         public async Task<IActionResult> Put(Guid eventId, [FromBody]UpdateEvent command)
         {
             await _eventService.UpdateAsync(eventId, command.Name,
@@ -58,6 +61,7 @@ namespace Evento.Api.Controllers
         }
 
         [HttpDelete("{eventId}")]
+        [Authorize(Policy = "HasAdminRole")]
         public async Task<IActionResult> Delete(Guid eventId)
         {
             await _eventService.DeleteAsync(eventId);
