@@ -13,9 +13,9 @@ namespace Evento.Core.Repositories
 
          Task<IEnumerable<Event>> BrowseAsync(string name="");
 
-         Task AddSync(Event @event);
+         Task AddAsync(Event @event);
 
-         Task UpdateSync(Event @event);
+         Task UpdateAsync(Event @event);
 
          Task DeleteAsync(Event @event);
     }

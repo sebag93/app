@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Evento.Core.Domain;
 using Evento.Core.Repositories;
 
-namespace src.Evento.Infrastructure.Extensions
+namespace Evento.Infrastructure.Extensions
 {
     public static class RepositoryExtensions
     {

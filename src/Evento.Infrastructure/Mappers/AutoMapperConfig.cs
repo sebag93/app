@@ -1,9 +1,9 @@
 using System.Linq;
 using AutoMapper;
 using Evento.Core.Domain;
-using src.Evento.Infrastructure.DTO;
+using Evento.Infrastructure.DTO;
 
-namespace src.Evento.Infrastructure.Mappers
+namespace Evento.Infrastructure.Mappers
 {
     public static class AutoMapperConfig
     {

@@ -32,13 +32,13 @@ namespace Evento.Infrastructure.Repositories
             return await Task.FromResult(events);
         }
 
-        public async Task AddSync(Event @event)
+        public async Task AddAsync(Event @event)
         {
             _events.Add(@event);
             await Task.CompletedTask;
         }
 
-        public async Task UpdateSync(Event @event)
+        public async Task UpdateAsync(Event @event)
         {
             await Task.CompletedTask;
         }

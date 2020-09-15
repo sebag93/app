@@ -1,6 +1,6 @@
 using System;
 
-namespace src.Evento.Infrastructure.Commands.Events
+namespace Evento.Infrastructure.Commands.Events
 {
     public class UpdateEvent
     {

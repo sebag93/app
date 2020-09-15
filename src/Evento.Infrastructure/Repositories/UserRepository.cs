@@ -5,7 +5,7 @@ using Evento.Core.Domain;
 using Evento.Core.Repositories;
 using System.Linq;
 
-namespace src.Evento.Infrastructure.Repositories
+namespace Evento.Infrastructure.Repositories
 {
     public class UserRepository : IUserRepository
     {

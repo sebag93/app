@@ -1,6 +1,6 @@
 using System;
 
-namespace src.Evento.Infrastructure.DTO
+namespace Evento.Infrastructure.DTO
 {
     public class TicketDTO
     {

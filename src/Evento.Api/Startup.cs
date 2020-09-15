@@ -1,14 +1,12 @@
-using System.Xml;
 using Evento.Core.Repositories;
+using Evento.Infrastructure.Mappers;
 using Evento.Infrastructure.Repositories;
+using Evento.Infrastructure.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using src.Evento.Infrastructure.Mappers;
-using src.Evento.Infrastructure.Repositories;
-using src.Evento.Infrastructure.Services;
 
 namespace Evento.Api
 {
@@ -25,7 +23,6 @@ namespace Evento.Api
         public void ConfigureServices(IServiceCollection services)
         {
             //services.AddControllers().AddJsonOptions(x => x.SerializerSettings.Formatting = Formatting.Indented);
-            // nie działa w wersi Core 3.0
             services.AddControllers();
             services.AddScoped<IEventRepository,EventRepository>();
             services.AddScoped<IUserRepository,UserRepository>();

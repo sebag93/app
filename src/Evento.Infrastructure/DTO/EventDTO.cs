@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace src.Evento.Infrastructure.DTO
+namespace Evento.Infrastructure.DTO
 {
     public class EventDTO
     {

@@ -1,8 +1,8 @@
 using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using src.Evento.Infrastructure.Commands.Events;
-using src.Evento.Infrastructure.Services;
+using Evento.Infrastructure.Commands.Events;
+using Evento.Infrastructure.Services;
 
 namespace src.Evento.Api.Controllers
 {
@@ -23,13 +23,13 @@ namespace src.Evento.Api.Controllers
             return Json(events);
         }
 
-        [HttpGet("{eventId")]
+        [HttpGet("{eventId}")]
         public async Task<IActionResult> Get(Guid eventId)
         {
             var @event = await _eventService.GetAsync(eventId);
             if(@event == null)
             {
-                return NotFound(); // code 404
+                return NotFound();
             }
 
             return Json(@event);
@@ -39,29 +39,29 @@ namespace src.Evento.Api.Controllers
         public async Task<IActionResult> Post([FromBody]CreateEvent command)
         {
             command.EventId = Guid.NewGuid();
-            await _eventService.CreateAsync(command.EventId,command.Name,command.Description,command.StartDate, command.EndDate);
-
-            await _eventService.AddTicketAsync(command.EventId, command.Tickets, command.Price);
+            await _eventService.CreateAsync(command.EventId, command.Name,
+                command.Description, command.StartDate, command.EndDate);
+            await _eventService.AddTicketsAsync(command.EventId, command.Tickets,
+                command.Price);
             // location header
             return Created($"/events/{command.EventId}", null);
         }
 
         // /events/{id} -> HTTP PUT
-        [HttpPut("{eventId")]
+        [HttpPut("{eventId}")]
         public async Task<IActionResult> Put(Guid eventId, [FromBody]UpdateEvent command)
         {
-            await _eventService.UpdateAsync(eventId,command.Name,command.Description);
+            await _eventService.UpdateAsync(eventId, command.Name,
+                command.Description);
 
-            // Code 204
             return NoContent();
         }
 
-        [HttpDelete("{eventId")]
+        [HttpDelete("{eventId}")]
         public async Task<IActionResult> Delete(Guid eventId)
         {
             await _eventService.DeleteAsync(eventId);
 
-            // Code 204
             return NoContent();
         }
     }
