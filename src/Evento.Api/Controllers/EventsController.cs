@@ -29,6 +29,7 @@ namespace src.Evento.Api.Controllers
             command.EventId = Guid.NewGuid();
             await _eventService.CreateAsync(command.EventId,command.Name,command.Description,command.StartDate, command.EndDate);
 
+            await _eventService.AddTicketAsync(command.EventId, command.Tickets, command.Price);
             // location header
             return Created($"/events/{command.EventId}", null);
         }
