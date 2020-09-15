@@ -2,15 +2,18 @@ using System;
 using System.Threading.Tasks;
 using Evento.Core.Domain;
 using Evento.Core.Repositories;
+using Evento.Infrastructure.DTO;
 
 namespace  Evento.Infrastructure.Services
 {
     public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
-        public UserService(IUserRepository userRepository)
+        private readonly IJwtHandler _jwtHandler;
+        public UserService(IUserRepository userRepository, IJwtHandler jwtHandler)
         {
             _userRepository = userRepository;
+            _jwtHandler = jwtHandler;
         }
 
         public async Task RegisterAsync(Guid userId, string email, 
@@ -25,7 +28,7 @@ namespace  Evento.Infrastructure.Services
             await _userRepository.AddAsync(user);
         }
 
-        public async Task LoginAsync(string email, string password)
+        public async Task<TokenDTO> LoginAsync(string email, string password)
         {
             var user = await _userRepository.GetAsync(email);
             if (user == null)
@@ -37,7 +40,15 @@ namespace  Evento.Infrastructure.Services
             {
                 throw new Exception("Invalid credentials.");
             }
-        }
+            
+            var jwt = _jwtHandler.CreateToken(user.Id,user.Role);
 
+            return new TokenDTO
+            {
+                Token = jwt.Token,
+                Expires = jwt.Expires,
+                Role = user.Role
+            };
+        }
     }
 }
