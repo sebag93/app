@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Evento.Api    
@@ -28,6 +29,7 @@ namespace Evento.Api
         {
             //services.AddControllers().AddJsonOptions(x => x.SerializerSettings.Formatting = Formatting.Indented);
             services.AddControllers();
+            services.AddAuthorization();
             services.AddScoped<IEventRepository,EventRepository>();
             services.AddScoped<IUserRepository,UserRepository>();
             services.AddScoped<IEventService,EventService>();
@@ -46,16 +48,16 @@ namespace Evento.Api
                 app.UseDeveloperExceptionPage();
             }
 
-            var jwtSettings = app.ApplicationServices.GetService<JwtSettings>();
+            var jwtSettings = app.ApplicationServices.GetService<IOptions<JwtSettings>>();
 
             app.UseJwtBearerAuthentication(new JwtBearerOptions
             {
                 AutomaticAuthenticate = true;
                 TokenValidationParameters = new TokenValidationParameters
                 {
-                    ValidIssuer = jwtSettings.Issuer,
+                    ValidIssuer = jwtSettings.Value.Issuer,
                     ValidateAudience = false,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Key))
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Value.Key))
 
                 }
             });
