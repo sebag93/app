@@ -3,6 +3,7 @@ using System;
 using Evento.Infrastructure.DTO;
 using Evento.Infrastructure.Settings;
 using System.Text;
+using Evento.Infrastructure.Extensions;
 
 namespace Evento.Infrastructure.Services
 {
@@ -23,7 +24,7 @@ namespace Evento.Infrastructure.Services
                 new Claim(JwtRegisteredClaimNames.UniqueName, userId.ToString()),
                 new Claim(ClaimTypes.Role, role),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim(JwtRegisteredClaimNames.Iat, now.Ticks.ToString()),
+                new Claim(JwtRegisteredClaimNames.Iat, now.ToTimestamp().ToString()),
             };
 
             var expires = now.AddMinutes(_jwtSettings.ExpiryMinutes);
@@ -41,7 +42,7 @@ namespace Evento.Infrastructure.Services
             return new JwtDTO
             {
                 Token = token,
-                Expires = expires.Ticks
+                Expires = expires.ToTimestamp()
             }
         }
     }
