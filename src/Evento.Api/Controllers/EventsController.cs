@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Evento.Infrastructure.Commands.Events;
 using Evento.Infrastructure.Services;
 
-namespace src.Evento.Api.Controllers
+namespace Evento.Api.Controllers
 {
     [Route("[controller]")]
     public class EventsController : Controller

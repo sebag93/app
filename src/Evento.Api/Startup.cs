@@ -28,6 +28,7 @@ namespace Evento.Api
             services.AddScoped<IUserRepository,UserRepository>();
             services.AddScoped<IEventService,EventService>();
             services.AddSingleton(AutoMapperConfig.Initialize());
+            services.AddScoped<IUserService,UserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -10,7 +10,7 @@ namespace Evento.Core.Repositories
 
          Task<User> GetAsync(string email);
 
-         Task AddSync(User user);
+         Task AddAsync(User user);
 
          Task UpdateSync(User user);
 
