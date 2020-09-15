@@ -8,9 +8,9 @@ namespace src.Evento.Infrastructure.Services
 {
     public interface IEventService
     {
-        Task<EventDTO> GetAsync(Guid id);
+        Task<EventDetailsDTO> GetAsync(Guid id);
 
-        Task<EventDTO> GetAsync(string name);
+        Task<EventDetailsDTO> GetAsync(string name);
 
         Task<IEnumerable<EventDTO>> BrowseAsync (string name = null);
 
