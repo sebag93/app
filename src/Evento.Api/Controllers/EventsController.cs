@@ -43,5 +43,14 @@ namespace src.Evento.Api.Controllers
             // Code 204
             return NoContent();
         }
+
+        [HttpDelete("{eventId")]
+        public async Task<IActionResult> Delete(Guid eventId)
+        {
+            await _eventService.DeleteAsync(eventId);
+
+            // Code 204
+            return NoContent();
+        }
     }
 }

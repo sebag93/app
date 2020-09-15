@@ -73,7 +73,8 @@ namespace src.Evento.Infrastructure.Services
 
         public async Task DeleteAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var @event = await _eventRepository.GetOrFailAsync(id);
+            await _eventRepository.DeleteAsync(@event);
         }
     }
 }
