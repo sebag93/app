@@ -33,5 +33,15 @@ namespace src.Evento.Api.Controllers
             // location header
             return Created($"/events/{command.EventId}", null);
         }
+
+        // /events/{id} -> HTTP PUT
+        [HttpPut("{eventId")]
+        public async Task<IActionResult> Put(Guid eventId, [FromBody]UpdateEvent command)
+        {
+            await _eventService.UpdateAsync(eventId,command.Name,command.Description);
+
+            // Code 204
+            return NoContent();
+        }
     }
 }

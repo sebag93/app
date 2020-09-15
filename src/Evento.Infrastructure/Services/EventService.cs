@@ -62,7 +62,21 @@ namespace src.Evento.Infrastructure.Services
 
         public async Task UpdateAsync(Guid id, string name, string description)
         {
-            throw new NotImplementedException();
+            var @event = await _eventRepository.GetAsync(id);
+            if(@event == null)
+            {
+                throw new Exception($"Event with id: '{id}' does not exist.");
+            }
+
+            @event = await _eventRepository.GetAsync(name);
+            if(@event != null)
+            {
+                throw new Exception($"Event named: '{name}' already exists.");
+            }
+
+            @event.SetName(name);
+            @event.SetDescritpion(description);
+            await _eventRepository.UpdateSync(@event);
         }
 
         public async Task DeleteAsync(Guid id)
