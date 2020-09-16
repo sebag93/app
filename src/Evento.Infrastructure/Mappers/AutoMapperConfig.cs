@@ -17,6 +17,7 @@ namespace Evento.Infrastructure.Mappers
                     ;
                 cfg.CreateMap<Event,EventDetailsDTO>();
                 cfg.CreateMap<Ticket,TicketDTO>();
+                cfg.CreateMap<Ticket,TicketDetailsDTO>();
                 cfg.CreateMap<User,AccountDTO>();
             })
             .CreateMapper();

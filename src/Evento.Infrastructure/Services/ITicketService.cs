@@ -7,7 +7,7 @@ namespace Evento.Infrastructure.Services
 {
     public interface ITicketService
     {
-        Task<IEnumerable<TicketDTO>> GetForUserAsync(Guid userId);
+        Task<IEnumerable<TicketDetailsDTO>> GetForUserAsync(Guid userId);
 
         Task<TicketDTO> GetAsync(Guid userId, Guid eventId, Guid ticketId);
         Task PurchaseAsync(Guid userId, Guid eventId, int amount);
