@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Evento.Core.Repositories;
@@ -19,6 +21,16 @@ namespace Evento.Infrastructure.Services
             _eventRepository = eventRepository;
             _userRepository = userRepository;
             _mapper = mapper;
+        }
+
+        public async Task<IEnumerable<TicketDTO>> GetForUserAsync(Guid userId)
+        {
+            var user = await _userRepository.GetOrFailAsync(userId);
+            var events = await _eventRepository.BrowseAsync();
+            
+            var tickets = events.SelectMany(x => x.GetTicketsPurchasedByUser(user));
+
+            return _mapper.Map<IEnumerable<TicketDTO>>(tickets);
         }
 
         public async Task<TicketDTO> GetAsync(Guid userId, Guid eventId, Guid ticketId)
