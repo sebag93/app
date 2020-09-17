@@ -18,6 +18,7 @@ using Newtonsoft.Json;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using System;
+using Evento.Api.Framework;
 
 namespace Evento.Api    
 {
@@ -83,6 +84,7 @@ namespace Evento.Api
                 }
             });
             SeedData(app);
+            app.UseErrorHandler();
             app.UseMvc();
             appLifetime.ApplicationStopped.Register(() => Container.Dispose());
 
