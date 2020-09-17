@@ -4,6 +4,9 @@ using Evento.Infrastructure.DTO;
 using Evento.Infrastructure.Settings;
 using System.Text;
 using Evento.Infrastructure.Extensions;
+using Microsoft.Extensions.Options;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Evento.Infrastructure.Services
 {
@@ -28,14 +31,14 @@ namespace Evento.Infrastructure.Services
             };
 
             var expires = now.AddMinutes(_jwtSettings.ExpiryMinutes);
-            var singingCredentials = new SingingCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Key)),
-            SecurityAlgorythms.HmacSha256);
+            var signingCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Key)),
+                SecurityAlgorithms.HmacSha256);
             var jwt = new JwtSecurityToken(
                 issuer: _jwtSettings.Issuer,
                 claims: claims,
                 notBefore: now,
                 expires: expires,
-                singingCredentials: singingCredentials
+                signingCredentials: signingCredentials
             );
             var token = new JwtSecurityTokenHandler().WriteToken(jwt);
 
