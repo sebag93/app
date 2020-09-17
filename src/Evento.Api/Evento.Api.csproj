@@ -3,7 +3,11 @@
   <ItemGroup>
     <ProjectReference Include="..\Evento.Infrastructure\Evento.Infrastructure.csproj" />
   </ItemGroup>
-
+  <ItemGroup>
+    <None Update="nlog.config">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Autofac" Version="4.6.0" />
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.1.0" />

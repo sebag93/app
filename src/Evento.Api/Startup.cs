@@ -15,6 +15,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using NLog.Extensions.Logging;
+using NLog.Web;
 
 namespace Evento.Api    
 {
@@ -57,8 +59,11 @@ namespace Evento.Api
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, Microsoft.AspNetCore.Hosting.IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
+            // loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+            // loggerFactory.AddDebug();
+            loggerFactory.AddNLog();
+            app.AddNLogWeb();
+            env.ConfigureNLog("nlog.config");
 
 
             if (env.IsDevelopment())
