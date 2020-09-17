@@ -1,5 +1,3 @@
-
-using System.Xml;
 using System;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -17,11 +15,14 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using NLog.Extensions.Logging;
 using NLog.Web;
+using Newtonsoft.Json;
 
 namespace Evento.Api    
 {
     public class Startup
     {
+        public IConfigurationRoot Configuration { get; }
+
         public Startup(Microsoft.AspNetCore.Hosting.IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -32,19 +33,11 @@ namespace Evento.Api
             Configuration = builder.Build();
         }
 
-        public Startup(IConfiguration configuration, TokenValidationParameters tokenValidationParameters) 
-        {
-            this.Configuration = configuration;
-    this.TokenValidationParameters = tokenValidationParameters;
-   
-        }
-                public IConfiguration Configuration { get; }
-        public TokenValidationParameters TokenValidationParameters { get; private set; }
-
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().AddJsonOptions(x => x.SerializerSettings.Formating = Formatting.Indented);
+            services.AddMemoryCache();
             services.AddAuthorization(x => x.AddPolicy("HasAdminRole", p => p.RequireRole("admin")));
             services.AddScoped<IEventRepository,EventRepository>();
             services.AddScoped<IUserRepository,UserRepository>();
