@@ -1,4 +1,3 @@
-using System;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,12 +15,16 @@ using System.Text;
 using NLog.Extensions.Logging;
 using NLog.Web;
 using Newtonsoft.Json;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using System;
 
 namespace Evento.Api    
 {
     public class Startup
     {
         public IConfigurationRoot Configuration { get; }
+        public IContainer Container {get; private set;}
 
         public Startup(Microsoft.AspNetCore.Hosting.IHostingEnvironment env)
         {
@@ -34,12 +37,12 @@ namespace Evento.Api
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().AddJsonOptions(x => x.SerializerSettings.Formating = Formatting.Indented);
             services.AddMemoryCache();
             services.AddAuthorization(x => x.AddPolicy("HasAdminRole", p => p.RequireRole("admin")));
-            services.AddScoped<IEventRepository,EventRepository>();
+            //services.AddScoped<IEventRepository,EventRepository>();
             services.AddScoped<IUserRepository,UserRepository>();
             services.AddScoped<IEventService,EventService>();
             services.AddScoped<ITicketService,TicketService>();
@@ -47,10 +50,17 @@ namespace Evento.Api
             services.AddScoped<IUserService,UserService>();
             services.AddSingleton<IJwtHandler,JwtHandler>();
             services.Configure<JwtSettings>(Configuration.GetSection("jwt)"));
+
+            var builder = new ContainerBuilder();
+            builder.Populate(services);
+            builder.RegisterType<EventRepository>().As<IEventRepository>().InstancePerLifetimeScope();
+            Container = builder.Build();
+            return new AutofacServiceProvider(Container);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, Microsoft.AspNetCore.Hosting.IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, Microsoft.AspNetCore.Hosting.IHostingEnvironment env, 
+        ILoggerFactory loggerFactory, Microsoft.AspNetCore.Hosting.IApplicationLifetime appLifetime)
         {
             // loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             // loggerFactory.AddDebug();
@@ -58,46 +68,21 @@ namespace Evento.Api
             app.AddNLogWeb();
             env.ConfigureNLog("nlog.config");
 
-
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
             var jwtSettings = app.ApplicationServices.GetService<IOptions<JwtSettings>>();
 
-            app.UseJwtBearerAuthentication(NewMethod(jwtSettings));
-
-            app.UseHttpsRedirection();
-
-            app.UseRouting();
-
-            app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
+            app.UseJwtBearerAuthentication(new JwtBearerOptions
             {
-                endpoints.MapControllers();
-            });
-
-            static JwtBearerOptions NewMethod(IOptions<JwtSettings> jwtSettings)
-            {
-                return NewMethod1(jwtSettings);
-
-                static JwtBearerOptions NewMethod1(IOptions<JwtSettings> jwtSettings)
+                AutomaticAuthenticate = true,
+                TokenValidationParameters = new TokenValidationParameters
                 {
-                    return new JwtBearerOptions
-                    {
-                        AutomaticAuthenticate = true,
-                        TokenValidationParameters = new TokenValidationParameters
-                        {
-                            ValidIssuer = jwtSettings.Value.Issuer,
-                            ValidateAudience = false,
-                            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Value.Key))
-
-                        }
-                    };
+                    ValidIssuer = jwtSettings.Value.Issuer,
+                    ValidateAudience = false,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Value.Key))
                 }
-            }
+            });
+            app.UseMvc();
+            appLifetime.ApplicationStopped.Register(() => Container.Dispose());
+
         }
     }
 }
