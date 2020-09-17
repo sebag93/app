@@ -7,6 +7,7 @@ using System.Linq;
 using AutoMapper;
 using Evento.Core.Domain;
 using Evento.Infrastructure.Extensions;
+using Microsoft.Extensions.Logging;
 
 namespace Evento.Infrastructure.Services
 {
@@ -14,10 +15,12 @@ namespace Evento.Infrastructure.Services
     {
         private readonly IEventRepository _eventRepository;
         private readonly IMapper _mapper;
-        public EventService(IEventRepository eventRepository, IMapper mapper)
+        private readonly ILogger _logger;
+        public EventService(IEventRepository eventRepository, IMapper mapper, ILogger<EventService> logger)
         {
             _eventRepository = eventRepository;
             _mapper = mapper;
+            _logger = logger;
         }
 
         public async Task<EventDetailsDTO> GetAsync(Guid id)
@@ -36,6 +39,7 @@ namespace Evento.Infrastructure.Services
 
         public async Task<IEnumerable<EventDTO>> BrowseAsync(string name = null)
         {
+            _logger.LogTrace("Fetching events");
             var events = await _eventRepository.BrowseAsync(name);
 
             return _mapper.Map<IEnumerable<EventDTO>>(events);
