@@ -50,6 +50,8 @@ namespace Evento.Api
             services.AddScoped<IUserService,UserService>();
             services.AddSingleton<IJwtHandler,JwtHandler>();
             services.Configure<JwtSettings>(Configuration.GetSection("jwt)"));
+            services.Configure<AppSettings>(Configuration.GetSection("app)"));
+            services.AddScoped<IDataInitializer,DataInitializer>();
 
             var builder = new ContainerBuilder();
             builder.Populate(services);
@@ -80,9 +82,20 @@ namespace Evento.Api
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Value.Key))
                 }
             });
+            SeedData(app);
             app.UseMvc();
             appLifetime.ApplicationStopped.Register(() => Container.Dispose());
 
+        }
+
+        private void SeedData(IApplicationBuilder app)
+        {
+            var settings = app.ApplicationServices.GetService<IOptions<AppSettings>>();
+            if(settings.Value.SeedData)
+            {
+                var dataInitializer = app.ApplicationServices.GetService<IDataInitializer>();
+                dataInitializer.SeedAsync();
+            }
         }
     }
 }
