@@ -43,7 +43,7 @@ namespace Evento.Infrastructure.Services
             {
                 Token = token,
                 Expires = expires.ToTimestamp()
-            }
+            };
         }
     }
 }
