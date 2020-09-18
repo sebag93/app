@@ -133,3 +133,7 @@ C:\KURSY\.NetDev\5\app\tests\Evento.Tests\bin\Debug\netcoreapp3.1\Evento.Core.dl
 C:\KURSY\.NetDev\5\app\tests\Evento.Tests\bin\Debug\netcoreapp3.1\Evento.Infrastructure.dll
 C:\KURSY\.NetDev\5\app\tests\Evento.Tests\bin\Debug\netcoreapp3.1\Evento.Core.pdb
 C:\KURSY\.NetDev\5\app\tests\Evento.Tests\bin\Debug\netcoreapp3.1\Evento.Infrastructure.pdb
+C:\KURSY\.NetDev\5\app\tests\Evento.Tests\bin\Debug\netcoreapp3.1\Castle.Core.dll
+C:\KURSY\.NetDev\5\app\tests\Evento.Tests\bin\Debug\netcoreapp3.1\FluentAssertions.Core.dll
+C:\KURSY\.NetDev\5\app\tests\Evento.Tests\bin\Debug\netcoreapp3.1\FluentAssertions.dll
+C:\KURSY\.NetDev\5\app\tests\Evento.Tests\bin\Debug\netcoreapp3.1\Moq.dll
